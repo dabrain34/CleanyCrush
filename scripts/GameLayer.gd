@@ -456,14 +456,14 @@ func animateBeginEndGame(end = false):
 	
 	var cPos = get_pos()
 	var pos = Vector2(get_pos().x + (global.NumColumns*global.TILE_WIDTH)*2, get_pos().y)
-	
+	var tween_ease = Tween.EASE_OUT
 	if end:
 		cPos = pos
 		pos = get_pos()
+		tween_ease = Tween.EASE_IN
 	else: set_pos(pos)
 	
-	tween.interpolate_method(self, "set_pos", pos, cPos, 1.0, Tween.TRANS_BACK, \
-	(Tween.EASE_OUT if not end else Tween.EASE_IN))
+	tween.interpolate_method(self, "set_pos", pos, cPos, 1.0, Tween.TRANS_BACK, tween_ease)
 	tween.interpolate_callback(self, tween.get_runtime(), "removeNode", tween)
 	tween.start()
 
